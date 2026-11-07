@@ -102,7 +102,7 @@ export default function ComparisonSlider({
               <img
                 src={rightImg}
                 alt="Optimized Right"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-contain bg-dark-950 p-1"
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-xs text-slate-500">
@@ -119,7 +119,7 @@ export default function ComparisonSlider({
                 <img
                   src={leftImg}
                   alt="Baseline Left"
-                  className="absolute inset-0 w-full h-full object-cover max-w-none"
+                  className="absolute inset-0 w-full h-full object-contain bg-dark-950 p-1 max-w-none"
                   style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%' }}
                 />
               </div>

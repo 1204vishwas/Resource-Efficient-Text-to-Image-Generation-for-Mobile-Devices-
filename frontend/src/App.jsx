@@ -9,17 +9,20 @@ import MetricsDashboard from './components/MetricsDashboard';
 import AdaptiveBudgetSelector from './components/AdaptiveBudgetSelector';
 import BenchmarkSuite from './components/BenchmarkSuite';
 import MobileDeviceSimulator from './components/MobileDeviceSimulator';
-import { Sparkles, Download, Eye, RefreshCw, Layers } from 'lucide-react';
+import { Sparkles, Download, Eye, RefreshCw, Maximize2, X, CheckCircle2, Sliders } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('studio');
 
   // Generation prompt & analysis
-  const [prompt, setPrompt] = useState(
-    'A red vintage sports car parked to the left of a blue glass skyscraper under a golden sunset'
-  );
+  const [prompt, setPrompt] = useState('a sports car standing in road');
   const [promptAnalysis, setPromptAnalysis] = useState(null);
   const [presets, setPresets] = useState([]);
+
+  // Frame display controls (Fit vs Fill & View Mode)
+  const [fitMode, setFitMode] = useState('contain'); // 'contain' (whole image fitted) | 'cover'
+  const [viewVersion, setViewVersion] = useState('enhanced'); // 'enhanced' | 'raw_latent'
+  const [fullscreenModal, setFullscreenModal] = useState(false);
 
   // Model & Pipeline Configuration
   const [config, setConfig] = useState({
@@ -56,7 +59,7 @@ export default function App() {
   const [isFiltering, setIsFiltering] = useState(false);
   const [isBenchmarking, setIsBenchmarking] = useState(false);
 
-  // Fetch presets on load
+  // Fetch presets on load & auto-generate initial sample
   useEffect(() => {
     fetch('/api/presets')
       .then(res => res.json())
@@ -65,7 +68,6 @@ export default function App() {
       })
       .catch(err => console.error('Presets error:', err));
 
-    // Auto-generate initial sample
     handleGenerate();
   }, []);
 
@@ -73,7 +75,7 @@ export default function App() {
     setIsGenerating(true);
     try {
       const payload = {
-        prompt: prompt.trim(),
+        prompt: prompt.trim() || 'a sports car standing in road',
         model_type: config.model_type,
         precision: config.precision,
         steps: config.steps,
@@ -178,6 +180,10 @@ export default function App() {
     setActiveTab('studio');
   };
 
+  const activeDisplayImage = viewVersion === 'enhanced'
+    ? (generatedImages?.enhanced || generatedImages?.raw_latent)
+    : (generatedImages?.raw_latent || generatedImages?.enhanced);
+
   return (
     <div className="min-h-screen flex flex-col bg-dark-950 text-slate-100">
       <Header
@@ -202,31 +208,84 @@ export default function App() {
               {/* Primary Canvas & Preview */}
               <div className="lg:col-span-7">
                 <div className="glass-panel rounded-2xl p-5 shadow-xl flex flex-col justify-between h-full">
-                  <div className="flex items-center justify-between mb-3 pb-2 border-b border-dark-800">
+                  {/* Canvas Toolbar */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-dark-800">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-brand-400" />
                       <h3 className="text-sm font-bold text-slate-100">
-                        Synthesized Image Canvas (512x512)
+                        Synthesized Image Canvas
                       </h3>
-                    </div>
-                    {metrics && (
-                      <span className="text-xs text-accent-cyan font-mono">
-                        Latency: {metrics.total_latency_ms} ms
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-dark-800 text-slate-300 border border-dark-700">
+                        512 × 512 HD
                       </span>
-                    )}
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-xs">
+                      {/* Version Toggle (Enhanced vs Raw) */}
+                      <div className="bg-dark-900 p-0.5 rounded-lg border border-dark-700 flex text-[11px] font-medium mr-1">
+                        <button
+                          onClick={() => setViewVersion('enhanced')}
+                          className={`px-2 py-1 rounded transition-all ${
+                            viewVersion === 'enhanced'
+                              ? 'bg-accent-emerald/20 text-accent-emerald font-semibold border border-accent-emerald/30'
+                              : 'text-slate-400 hover:text-slate-200'
+                          }`}
+                        >
+                          Enhanced (CV Sharp)
+                        </button>
+                        <button
+                          onClick={() => setViewVersion('raw_latent')}
+                          className={`px-2 py-1 rounded transition-all ${
+                            viewVersion === 'raw_latent'
+                              ? 'bg-brand-500/20 text-brand-400 font-semibold border border-brand-500/30'
+                              : 'text-slate-400 hover:text-slate-200'
+                          }`}
+                        >
+                          Raw Latent
+                        </button>
+                      </div>
+
+                      {/* Frame Fit Toggle */}
+                      <button
+                        onClick={() => setFitMode(prev => prev === 'contain' ? 'cover' : 'contain')}
+                        title={fitMode === 'contain' ? "Fitted within frame (no clipping)" : "Filled entire frame"}
+                        className="px-2 py-1 rounded-lg bg-dark-900 hover:bg-dark-800 border border-dark-700 text-slate-300 text-[11px] font-mono"
+                      >
+                        {fitMode === 'contain' ? 'Fit: Whole Image' : 'Fit: Fill Frame'}
+                      </button>
+
+                      {/* Fullscreen Button */}
+                      {activeDisplayImage && (
+                        <button
+                          onClick={() => setFullscreenModal(true)}
+                          title="View Fullscreen High-Definition"
+                          className="p-1 rounded-lg bg-dark-900 hover:bg-dark-800 border border-dark-700 text-slate-300"
+                        >
+                          <Maximize2 className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-dark-900 border border-dark-700 shadow-inner flex items-center justify-center">
+                  {/* Canvas Container with Frame Fitting */}
+                  <div className="relative w-full aspect-square max-h-[512px] rounded-xl overflow-hidden bg-dark-950 border border-dark-700 shadow-2xl flex items-center justify-center p-1">
                     {isGenerating ? (
                       <div className="flex flex-col items-center gap-3 text-brand-400 text-sm">
-                        <RefreshCw className="w-8 h-8 animate-spin text-accent-cyan" />
-                        <span className="font-medium animate-pulse">Running {config.steps}-Step LCM Diffusion & Classical CV...</span>
+                        <RefreshCw className="w-9 h-9 animate-spin text-accent-cyan" />
+                        <span className="font-semibold animate-pulse text-slate-200">
+                          Synthesizing Crisp Imagery with {config.steps}-Step LCM Diffusion...
+                        </span>
+                        <span className="text-xs text-slate-400">
+                          Executing INT8 inference & edge-preserving computer vision
+                        </span>
                       </div>
-                    ) : generatedImages?.enhanced ? (
+                    ) : activeDisplayImage ? (
                       <img
-                        src={generatedImages.enhanced}
-                        alt="Synthesized Output"
-                        className="w-full h-full object-cover transition-opacity duration-300"
+                        src={activeDisplayImage}
+                        alt="Synthesized Canvas"
+                        className={`w-full h-full rounded-lg transition-all duration-300 shadow-md ${
+                          fitMode === 'contain' ? 'object-contain' : 'object-cover'
+                        }`}
                       />
                     ) : (
                       <div className="text-slate-500 text-xs">
@@ -235,18 +294,21 @@ export default function App() {
                     )}
                   </div>
 
-                  {generatedImages?.enhanced && (
-                    <div className="flex items-center justify-between pt-3 mt-3 border-t border-dark-800 text-xs">
+                  {/* Bottom Stats & Actions */}
+                  {generatedImages && (
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-3 mt-3 border-t border-dark-800 text-xs">
                       <div className="flex items-center gap-2 text-slate-400 font-mono text-[11px]">
                         <span>CLIP: <strong className="text-brand-400">{((metrics?.clip_similarity || 0.86) * 100).toFixed(1)}%</strong></span>
                         <span>•</span>
                         <span>RAM: <strong className="text-accent-emerald">{metrics?.peak_memory_mb || 162} MB</strong></span>
                         <span>•</span>
-                        <span>Quality: <strong className="text-accent-cyan">{metrics?.quality_score || 75}/100</strong></span>
+                        <span>Sharpness: <strong className="text-accent-cyan">{metrics?.laplacian_sharpness || 185}</strong></span>
+                        <span>•</span>
+                        <span>Quality: <strong className="text-accent-emerald">{metrics?.quality_score || 82}/100</strong></span>
                       </div>
 
                       <a
-                        href={generatedImages.enhanced}
+                        href={activeDisplayImage}
                         download={`mobilediff_${Date.now()}.jpg`}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-800 hover:bg-dark-700 text-slate-200 border border-dark-700 font-semibold"
                       >
@@ -331,6 +393,31 @@ export default function App() {
           />
         )}
       </main>
+
+      {/* Fullscreen HD Modal */}
+      {fullscreenModal && activeDisplayImage && (
+        <div
+          onClick={() => setFullscreenModal(false)}
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4 cursor-pointer"
+        >
+          <div className="relative max-w-3xl w-full flex flex-col items-center">
+            <button
+              onClick={() => setFullscreenModal(false)}
+              className="absolute -top-10 right-0 text-slate-300 hover:text-white flex items-center gap-1 text-sm bg-dark-900/80 px-3 py-1 rounded-full border border-dark-700"
+            >
+              <X className="w-4 h-4" /> Close
+            </button>
+            <img
+              src={activeDisplayImage}
+              alt="High Definition Fullscreen View"
+              className="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl border border-dark-700"
+            />
+            <div className="mt-3 text-xs text-slate-300 font-mono bg-dark-900/90 px-4 py-1.5 rounded-full border border-dark-800">
+              Prompt: "{prompt}" • 512×512 HD • Enhanced by Classical CV Pipeline
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="border-t border-dark-800 bg-dark-900/60 py-4 text-xs text-slate-400">

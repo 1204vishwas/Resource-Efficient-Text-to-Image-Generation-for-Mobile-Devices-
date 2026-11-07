@@ -93,12 +93,12 @@ export default function MobileDeviceSimulator({
             </div>
 
             {/* Rendered Image Canvas in Mobile View */}
-            <div className="w-full aspect-square rounded-2xl overflow-hidden bg-dark-900 border border-dark-800 relative shadow-inner mb-3">
+            <div className="w-full aspect-square rounded-2xl overflow-hidden bg-dark-950 border border-dark-800 relative shadow-inner mb-3 flex items-center justify-center p-1">
               {currentImage ? (
                 <img
                   src={currentImage}
                   alt="Generated Mobile Canvas"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain rounded-xl"
                 />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center text-slate-500 text-xs">
