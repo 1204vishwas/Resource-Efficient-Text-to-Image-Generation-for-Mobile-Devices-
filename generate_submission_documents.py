@@ -58,7 +58,7 @@ def generate_docx(output_path):
     r_meta = sub.add_run(
         "Team ID: T91 | Evaluated Model: INT8 Quantized MobileDiffusion UNet (142M Parameters, LCM 4-Step)\n"
         "GitHub Repository: https://github.com/1204vishwas/Resource-Efficient-Text-to-Image-Generation-for-Mobile-Devices-\n"
-        "Evaluated Commit SHA: b54cb32239f5ad974a7a003df8f2d2acbb3eb2f6\n"
+        "Evaluated Commit SHA: 1609685b75fe6ae628d2e861b31955ed0b4f5273\n"
         "Date of Evaluation: November 2026"
     )
     r_meta.font.size = Pt(9.5)
@@ -225,7 +225,7 @@ def generate_docx(output_path):
         "Disclosure & Reproducibility Notice: Physical benchmark numbers were obtained on the evaluation host testbed "
         "(Windows, Python 3.13, PyTorch 2.14 CPU, OpenCV 4.12) via backend/benchmark_verification.py. "
         "Snapdragon 8 Gen 3 Hexagon NPU (45 TOPS) and Apple A17 Pro (35 TOPS) figures represent analytical roofline hardware throughput projections. "
-        "The complete evaluated repository commit is b54cb32239f5ad974a7a003df8f2d2acbb3eb2f6."
+        "The complete evaluated repository commit is 1609685b75fe6ae628d2e861b31955ed0b4f5273."
     )
     r_disc.font.size = Pt(8.5)
     r_disc.font.italic = True
@@ -317,7 +317,7 @@ def generate_pdf(output_path):
     elements.append(Paragraph(
         "<b>Team ID:</b> T91 &nbsp;|&nbsp; <b>Evaluated Model:</b> INT8 MobileDiffusion UNet (142M Params, LCM 4-Step)<br/>"
         "<b>GitHub:</b> https://github.com/1204vishwas/Resource-Efficient-Text-to-Image-Generation-for-Mobile-Devices-<br/>"
-        "<b>Commit SHA:</b> <code>b54cb32239f5ad974a7a003df8f2d2acbb3eb2f6</code> &nbsp;|&nbsp; <b>Date:</b> November 2026",
+        "<b>Commit SHA:</b> <code>1609685b75fe6ae628d2e861b31955ed0b4f5273</code> &nbsp;|&nbsp; <b>Date:</b> November 2026",
         meta_style
     ))
     elements.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor('#E2E8F0'), spaceAfter=8))
@@ -403,7 +403,7 @@ def generate_pdf(output_path):
         "<b>Scientific Integrity & Methodology Disclosure:</b> Physical host measurements were executed directly on the testbed using "
         "Python 3.13, PyTorch 2.14, and OpenCV 4.12 via <code>backend/benchmark_verification.py</code>. "
         "Snapdragon 8 Gen 3 Hexagon NPU (45 TOPS) and Apple A17 Pro (35 TOPS) metrics represent analytical roofline hardware throughput projections. "
-        "Evaluated code repository corresponds to commit SHA: <code>b54cb32239f5ad974a7a003df8f2d2acbb3eb2f6</code>.",
+        "Evaluated code repository corresponds to commit SHA: <code>1609685b75fe6ae628d2e861b31955ed0b4f5273</code>.",
         meta_style
     ))
 

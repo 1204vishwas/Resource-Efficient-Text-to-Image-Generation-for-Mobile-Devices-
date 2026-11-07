@@ -3,7 +3,7 @@
 **Team ID:** T91  
 **Project Name:** MobileDiff-Edge  
 **GitHub Repository:** [Resource-Efficient-Text-to-Image-Generation-for-Mobile-Devices-](https://github.com/1204vishwas/Resource-Efficient-Text-to-Image-Generation-for-Mobile-Devices-)  
-**Evaluated Commit SHA:** `b54cb32239f5ad974a7a003df8f2d2acbb3eb2f6`  
+**Evaluated Commit SHA:** `1609685b75fe6ae628d2e861b31955ed0b4f5273`  
 **Evaluation Date:** November 2026  
 
 ---
