@@ -103,9 +103,9 @@ export default function PromptStudio({
       {/* Preset Buttons for Complex Prompts */}
       <div className="mb-4">
         <div className="text-xs text-slate-400 mb-2 flex items-center justify-between">
-          <span>Try Complex Multi-Object & Spatial Relationship Presets:</span>
+          <span>Try Reference Benchmark Prompts (From MobileDiffusion Research):</span>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
           {presets.map((p, idx) => (
             <button
               key={idx}

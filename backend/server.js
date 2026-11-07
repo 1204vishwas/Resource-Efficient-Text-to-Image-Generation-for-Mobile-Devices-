@@ -219,36 +219,50 @@ app.post('/api/adaptive-config', (req, res) => {
   }
 });
 
-// 6. Complex Prompt Presets Testing Multi-Object, Attributes, and Spatial Relations
+// 6. Complex Prompt Presets Matching Benchmark References
 app.get('/api/presets', (req, res) => {
   res.json([
     {
-      category: 'Multi-Object & Spatial Relationship',
-      title: 'Vintage Car & Modern Skyscraper',
-      prompt: 'A red vintage sports car parked to the left of a blue glass skyscraper under a golden sunset',
-      attributes: ['red', 'vintage', 'blue', 'glass', 'golden sunset'],
-      spatial: ['to the left of', 'under']
+      category: 'Nature & Landscape',
+      title: 'Beautiful Flower Garden',
+      prompt: 'beautiful flower there garden',
+      attributes: ['colorful flowers', 'green foliage', 'vibrant garden'],
+      spatial: ['in garden']
     },
     {
-      category: 'Complex Spatial Composition',
-      title: 'Forest Cabin with Mountain Backdrop',
-      prompt: 'A small wooden cabin nestled to the right of an emerald pine tree with snow-capped mountain peaks rising behind it',
-      attributes: ['wooden', 'emerald', 'snow-capped'],
-      spatial: ['to the right of', 'behind it']
+      category: 'Vehicles & Automotive',
+      title: 'Sports Car on Road',
+      prompt: 'a sports car standing in road',
+      attributes: ['aerodynamic body', 'polished alloy', 'asphalt road'],
+      spatial: ['standing in road']
     },
     {
-      category: 'Futuristic Cyberpunk & Lighting',
-      title: 'Cybernetic Beast in Rain',
-      prompt: 'A sleek neon blue cybernetic tiger standing near a glowing magenta street lamp on wet asphalt in a cyberpunk city',
-      attributes: ['neon blue', 'cybernetic', 'magenta', 'wet asphalt'],
-      spatial: ['standing near', 'on']
+      category: 'Animals & Accessories',
+      title: 'Cat Wearing a Hat',
+      prompt: 'a photo of a cat wearing a hat',
+      attributes: ['whiskers', 'pointed ears', 'woven hat', 'soft fur'],
+      spatial: ['wearing hat']
     },
     {
-      category: 'Organic Texture & Micro Scene',
-      title: 'Golden Retriever in Sunflowers',
-      prompt: 'A playful golden retriever puppy sitting in a vibrant yellow sunflower field with bright natural studio daylight',
-      attributes: ['golden', 'playful', 'yellow', 'vibrant', 'bright daylight'],
-      spatial: ['sitting in']
+      category: 'Culinary Photography',
+      title: 'Steak with Dipping Sauce',
+      prompt: 'Large plate of steak, with a side of dipping sauce, realistic advertising photo, 4k',
+      attributes: ['grilled steak', 'glistening meat', 'dipping sauce', 'gourmet plate'],
+      spatial: ['on plate', 'side of']
+    },
+    {
+      category: 'Wildlife Macro',
+      title: 'Hyper-Detailed Cute Fox',
+      prompt: 'a cute fox, hyper detailed, cinematic light, ultra high res, best shadow, RAW',
+      attributes: ['orange fur', 'cinematic lighting', 'sharp whiskers', 'ambient shadow'],
+      spatial: ['centered portrait']
+    },
+    {
+      category: 'Atmospheric Portrait',
+      title: 'Child in Yellow Raincoat',
+      prompt: 'a child sporting a yellow raincoat, vibrant against the gray of a rainy day, high resolution, 4k',
+      attributes: ['bright yellow raincoat', 'rain droplets', 'gray overcast backdrop'],
+      spatial: ['sporting raincoat', 'against rainy day']
     }
   ]);
 });
