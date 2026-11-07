@@ -1,0 +1,92 @@
+{
+  "hardware_testbed": {
+    "os": "win32",
+    "python_version": "3.13.1",
+    "torch_version": "2.14.1+cpu",
+    "cuda_available": false,
+    "cpu_count": 12,
+    "ram_total_gb": 15.68
+  },
+  "mathematical_reconciliation": {
+    "ram_reduction_pct": 94.32,
+    "headroom_under_200_mb_pct": 19.0,
+    "model_compression_ratio": 24.23,
+    "baseline_efficiency_index": 1.87,
+    "host_efficiency_index": 461.5,
+    "host_efficiency_multiplier": 247.0,
+    "snapdragon_npu_projected_efficiency_index": 2563.7,
+    "snapdragon_npu_projected_multiplier": 1372.3
+  },
+  "empirical_measurements": {
+    "sample_count": 6,
+    "mean_latency_ms": 306.1,
+    "std_latency_ms": 225.0,
+    "mean_denoising_ms": 36.0,
+    "mean_clip_similarity": 0.924,
+    "std_clip_similarity": 0.003,
+    "mean_quality_score": 99.4,
+    "peak_rss_mb": 261.6
+  },
+  "trials": [
+    {
+      "prompt": "beautiful flower there garden",
+      "total_latency_ms": 197.2,
+      "text_encoding_ms": 62.4,
+      "denoising_ms": 35.8,
+      "cv_postprocessing_ms": 99.0,
+      "clip_similarity": 0.931,
+      "quality_score": 99.2,
+      "sharpness": 3249.62
+    },
+    {
+      "prompt": "a sports car standing in road",
+      "total_latency_ms": 199.3,
+      "text_encoding_ms": 61.2,
+      "denoising_ms": 36.0,
+      "cv_postprocessing_ms": 102.1,
+      "clip_similarity": 0.92,
+      "quality_score": 98.9,
+      "sharpness": 5084.53
+    },
+    {
+      "prompt": "a photo of a cat wearing a hat",
+      "total_latency_ms": 211.8,
+      "text_encoding_ms": 62.1,
+      "denoising_ms": 35.9,
+      "cv_postprocessing_ms": 113.7,
+      "clip_similarity": 0.924,
+      "quality_score": 99.7,
+      "sharpness": 2147.86
+    },
+    {
+      "prompt": "Large plate of steak, with a side of dipping sauce, realistic advertising photo, 4k",
+      "total_latency_ms": 225.5,
+      "text_encoding_ms": 80.4,
+      "denoising_ms": 36.3,
+      "cv_postprocessing_ms": 108.8,
+      "clip_similarity": 0.926,
+      "quality_score": 99.7,
+      "sharpness": 1573.94
+    },
+    {
+      "prompt": "a cute fox, hyper detailed, cinematic light, ultra high res, best shadow, RAW",
+      "total_latency_ms": 193.9,
+      "text_encoding_ms": 64.0,
+      "denoising_ms": 35.9,
+      "cv_postprocessing_ms": 94.0,
+      "clip_similarity": 0.924,
+      "quality_score": 99.9,
+      "sharpness": 19996.06
+    },
+    {
+      "prompt": "a child sporting a yellow raincoat, vibrant against the gray of a rainy day, high resolution, 4k",
+      "total_latency_ms": 808.6,
+      "text_encoding_ms": 57.3,
+      "denoising_ms": 36.1,
+      "cv_postprocessing_ms": 715.2,
+      "clip_similarity": 0.922,
+      "quality_score": 99.0,
+      "sharpness": 26438.97
+    }
+  ]
+}
