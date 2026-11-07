@@ -11,10 +11,11 @@
 ### Team Information
 | # | Team Member Full Name | University Seat Number (USN) | Primary Project Role |
 | :-: | :--- | :--- | :--- |
-| **1** | [Team Member 1 Full Name] | [USN 1] | Model Optimization & Diffusion Pipeline |
-| **2** | [Team Member 2 Full Name] | [USN 2] | Classical Computer Vision & Super-Resolution |
-| **3** | [Team Member 3 Full Name] | [USN 3] | Interactive React UI & Telemetry Dashboard |
-| **4** | [Team Member 4 Full Name] | [USN 4] | Benchmarking, Empirical Testing & Hardware Profiling |
+| **1** | Vishwas Tripathi | 1RUA24CSE0539 | Project Lead & Model Optimization (Pruning, INT8 Quantization) |
+| **2** | Vishnuswaroop Ramkumar | 1RUA24CSE0537 | Deep Learning & Latent Diffusion Pipeline (MobileDiffusion, LCM) |
+| **3** | Yashash Ravi | 1RUA24CSE0547 | Classical Computer Vision & Edge-SuperRes (OpenCV, IQA, Filters) |
+| **4** | Vikas | 1RUA24CSE0531 | Frontend Architecture & Interactive UI Telemetry Dashboard |
+| **5** | Veena | 1RUA24CSE0526 | Benchmarking, Empirical Verification & Mobile SoC Profiling |
 
 ---
 

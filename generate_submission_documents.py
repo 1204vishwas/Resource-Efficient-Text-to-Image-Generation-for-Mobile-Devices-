@@ -56,7 +56,7 @@ def generate_docx(output_path):
     r_sub.font.color.rgb = RGBColor(0x3B, 0x82, 0xF6)
 
     r_meta = sub.add_run(
-        "Team ID: T91 (Team 7) | Evaluated Model: INT8 Quantized MobileDiffusion UNet (142M Parameters, LCM 4-Step)\n"
+        "Team ID: T91 | Evaluated Model: INT8 Quantized MobileDiffusion UNet (142M Parameters, LCM 4-Step)\n"
         "GitHub Repository: https://github.com/1204vishwas/Resource-Efficient-Text-to-Image-Generation-for-Mobile-Devices-\n"
         "Evaluated Commit SHA: b54cb32239f5ad974a7a003df8f2d2acbb3eb2f6\n"
         "Date of Evaluation: November 2026"
@@ -67,18 +67,19 @@ def generate_docx(output_path):
     doc.add_paragraph().paragraph_format.space_after = Pt(6)
 
     # ---------------- TEAM MEMBERS TABLE ----------------
-    h_team = doc.add_heading("Team Identification & Responsibilities", level=1)
+    h_team = doc.add_heading("Team Identification & Student Information", level=1)
     h_team.paragraph_format.space_before = Pt(10)
     h_team.paragraph_format.space_after = Pt(6)
 
-    team_table = doc.add_table(rows=5, cols=4)
+    team_table = doc.add_table(rows=6, cols=4)
     team_table.alignment = WD_TABLE_ALIGNMENT.CENTER
     headers = ["#", "Team Member Full Name", "University Seat Number (USN)", "Primary Project Role"]
     team_data = [
-        ["1", "[Team Member 1 Full Name]", "[USN 1]", "Model Optimization & Diffusion Pipeline"],
-        ["2", "[Team Member 2 Full Name]", "[USN 2]", "Classical Computer Vision & Super-Resolution"],
-        ["3", "[Team Member 3 Full Name]", "[USN 3]", "Interactive React UI & Telemetry Dashboard"],
-        ["4", "[Team Member 4 Full Name]", "[USN 4]", "Benchmarking, Empirical Testing & Profiling"]
+        ["1", "Vishwas Tripathi", "1RUA24CSE0539", "Project Lead & Model Optimization (Pruning, INT8)"],
+        ["2", "Vishnuswaroop Ramkumar", "1RUA24CSE0537", "Deep Learning & Latent Diffusion Pipeline (LCM)"],
+        ["3", "Yashash Ravi", "1RUA24CSE0547", "Classical Computer Vision & Super-Resolution (OpenCV)"],
+        ["4", "Vikas", "1RUA24CSE0531", "Frontend Architecture & UI Telemetry Dashboard"],
+        ["5", "Veena", "1RUA24CSE0526", "Benchmarking, Empirical Verification & SoC Profiling"]
     ]
 
     for c_idx, h_text in enumerate(headers):
@@ -314,7 +315,7 @@ def generate_pdf(output_path):
     elements.append(Paragraph("Evaluation Report: MobileDiff-Edge", title_style))
     elements.append(Paragraph("Problem Statement 3 (ProbID - P3): Resource-Efficient Text-to-Image Generation for Mobile Devices", subtitle_style))
     elements.append(Paragraph(
-        "<b>Team ID:</b> T91 (Team 7) &nbsp;|&nbsp; <b>Evaluated Model:</b> INT8 MobileDiffusion UNet (142M Params, LCM 4-Step)<br/>"
+        "<b>Team ID:</b> T91 &nbsp;|&nbsp; <b>Evaluated Model:</b> INT8 MobileDiffusion UNet (142M Params, LCM 4-Step)<br/>"
         "<b>GitHub:</b> https://github.com/1204vishwas/Resource-Efficient-Text-to-Image-Generation-for-Mobile-Devices-<br/>"
         "<b>Commit SHA:</b> <code>b54cb32239f5ad974a7a003df8f2d2acbb3eb2f6</code> &nbsp;|&nbsp; <b>Date:</b> November 2026",
         meta_style
@@ -325,10 +326,11 @@ def generate_pdf(output_path):
     elements.append(Paragraph("Team Identification & Student Information", h1_style))
     team_data = [
         [Paragraph("#", table_header_style), Paragraph("Team Member Full Name", table_header_style), Paragraph("University Seat Number (USN)", table_header_style), Paragraph("Primary Project Role", table_header_style)],
-        [Paragraph("1", table_text_style), Paragraph("[Team Member 1 Full Name]", table_text_style), Paragraph("[USN 1]", table_text_style), Paragraph("Model Optimization & Diffusion Pipeline", table_text_style)],
-        [Paragraph("2", table_text_style), Paragraph("[Team Member 2 Full Name]", table_text_style), Paragraph("[USN 2]", table_text_style), Paragraph("Classical Computer Vision & Super-Resolution", table_text_style)],
-        [Paragraph("3", table_text_style), Paragraph("[Team Member 3 Full Name]", table_text_style), Paragraph("[USN 3]", table_text_style), Paragraph("Interactive React UI & Telemetry Dashboard", table_text_style)],
-        [Paragraph("4", table_text_style), Paragraph("[Team Member 4 Full Name]", table_text_style), Paragraph("[USN 4]", table_text_style), Paragraph("Benchmarking, Empirical Testing & Profiling", table_text_style)]
+        [Paragraph("1", table_text_style), Paragraph("Vishwas Tripathi", table_text_style), Paragraph("1RUA24CSE0539", table_text_style), Paragraph("Project Lead & Model Optimization (Pruning, INT8)", table_text_style)],
+        [Paragraph("2", table_text_style), Paragraph("Vishnuswaroop Ramkumar", table_text_style), Paragraph("1RUA24CSE0537", table_text_style), Paragraph("Deep Learning & Latent Diffusion Pipeline (LCM)", table_text_style)],
+        [Paragraph("3", table_text_style), Paragraph("Yashash Ravi", table_text_style), Paragraph("1RUA24CSE0547", table_text_style), Paragraph("Classical Computer Vision & Super-Resolution (OpenCV)", table_text_style)],
+        [Paragraph("4", table_text_style), Paragraph("Vikas", table_text_style), Paragraph("1RUA24CSE0531", table_text_style), Paragraph("Frontend Architecture & UI Telemetry Dashboard", table_text_style)],
+        [Paragraph("5", table_text_style), Paragraph("Veena", table_text_style), Paragraph("1RUA24CSE0526", table_text_style), Paragraph("Benchmarking, Empirical Verification & SoC Profiling", table_text_style)]
     ]
     t_team = Table(team_data, colWidths=[25, 175, 140, 200])
     t_team.setStyle(TableStyle([
